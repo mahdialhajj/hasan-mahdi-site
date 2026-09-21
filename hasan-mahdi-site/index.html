@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hasan Mahdi — Photography</title>
+<meta name="description" content="Hasan Mahdi is a photographer working in portraiture, architecture and documentary across Lebanon and the region.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d1319;
+    --ink-2:#131c24;
+    --ink-3:#1c2831;
+    --bone:#ece6db;
+    --bone-dim:#9aa7b0;
+    --brass:#c9a253;
+    --line:rgba(236,230,219,.14);
+    --page:var(--ink);
+    --text:var(--bone);
+    --muted:var(--bone-dim);
+    --panel:var(--ink-2);
+    --accent:var(--brass);
+    --scene-bg:#0d1319;
+    --scene-dust:#c9a253;
+    --shadow:0 30px 60px -30px rgba(0,0,0,.8);
+    --display:"Fraunces",Georgia,"Times New Roman",serif;
+    --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --maxw:1200px;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --page:#f1ede5;
+      --text:#141b22;
+      --muted:#5e6a73;
+      --panel:#e6e0d4;
+      --accent:#8d6a24;
+      --line:rgba(20,27,34,.16);
+      --scene-bg:#f1ede5;
+      --scene-dust:#8d6a24;
+      --shadow:0 30px 60px -34px rgba(20,27,34,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --page:#f1ede5;
+    --text:#141b22;
+    --muted:#5e6a73;
+    --panel:#e6e0d4;
+    --accent:#8d6a24;
+    --line:rgba(20,27,34,.16);
+    --scene-bg:#f1ede5;
+    --scene-dust:#8d6a24;
+    --shadow:0 30px 60px -34px rgba(20,27,34,.35);
+  }
+  :root[data-theme="dark"]{
+    --page:var(--ink);
+    --text:var(--bone);
+    --muted:var(--bone-dim);
+    --panel:var(--ink-2);
+    --accent:var(--brass);
+    --line:rgba(236,230,219,.14);
+    --scene-bg:#0d1319;
+    --scene-dust:#c9a253;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--page);color:var(--text);
+    font-family:var(--body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ---------- masthead ---------- */
+  header.site{
+    position:fixed;inset:0 0 auto 0;z-index:40;
+    backdrop-filter:blur(14px);
+    background:color-mix(in srgb, var(--page) 78%, transparent);
+    border-bottom:1px solid transparent;transition:border-color .3s ease;
+  }
+  header.site.scrolled{border-bottom-color:var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:74px}
+  .mark{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+  .mark b{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.01em}
+  .mark span{font-size:12px;letter-spacing:.24em;color:var(--muted)}
+  nav.links{display:flex;gap:30px}
+  nav.links a{font-size:14.5px;text-decoration:none;color:var(--muted);transition:color .2s}
+  nav.links a:hover{color:var(--text)}
+  .tools{display:flex;align-items:center;gap:14px}
+  .ghost{
+    font:inherit;font-size:14px;color:var(--text);background:none;
+    border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;
+    transition:border-color .2s,color .2s;
+  }
+  .ghost:hover{border-color:var(--accent);color:var(--accent)}
+  @media (max-width:880px){nav.links{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding-bottom:64px;overflow:hidden}
+  #dust{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:end}
+  h1{
+    font-family:var(--display);font-weight:300;margin:0;
+    font-size:clamp(3rem,9vw,7.2rem);line-height:.92;letter-spacing:-.02em;
+  }
+  h1 em{font-style:italic;font-weight:300}
+  .kicker{
+    margin:0 0 26px;font-size:15px;color:var(--muted);
+    display:flex;align-items:center;gap:14px;
+  }
+  .kicker::before{content:"";width:46px;height:1px;background:var(--accent);flex:none}
+  .hero p.lede{margin:0 0 8px;max-width:38ch;color:var(--muted);font-size:17px}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:26px;font-size:14px;color:var(--muted)}
+  .scroll-cue{margin-top:44px;font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:10px}
+  .scroll-cue i{display:block;width:1px;height:34px;background:var(--line);position:relative;overflow:hidden}
+  .scroll-cue i::after{content:"";position:absolute;inset:0;background:var(--accent);animation:trickle 2.6s ease-in-out infinite}
+  @keyframes trickle{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+  @media (max-width:880px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+
+  /* ---------- sections ---------- */
+  section{position:relative;z-index:2;background:var(--page)}
+  .pad{padding:110px 0}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:46px}
+  h2{font-family:var(--display);font-weight:300;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.05;margin:0;letter-spacing:-.015em}
+  .head p{margin:0;max-width:42ch;color:var(--muted);font-size:15.5px}
+
+  /* ---------- 3d gallery ---------- */
+  .gallery{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  .stage-shell{position:relative}
+  #stage{width:100%;height:clamp(380px,62vh,620px);display:block;cursor:grab;touch-action:pan-y}
+  #stage.dragging{cursor:grabbing}
+  .stage-ui{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding:0 0 10px;flex-wrap:wrap;
+  }
+  .caption{min-height:74px}
+  .caption h3{font-family:var(--display);font-weight:400;font-size:26px;margin:0 0 4px}
+  .caption p{margin:0;color:var(--muted);font-size:14.5px}
+  .pager{display:flex;align-items:center;gap:12px}
+  .pager button{
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+    background:none;color:var(--text);cursor:pointer;font-size:17px;line-height:1;
+    transition:border-color .2s,color .2s,transform .2s;
+  }
+  .pager button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;min-width:66px;text-align:center}
+  .hint{font-size:13px;color:var(--muted);padding-bottom:26px}
+
+  /* ---------- frames grid ---------- */
+  .frames{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+  .frame{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+  .frame canvas,.frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .frame:hover canvas,.frame:hover img{transform:scale(1.04)}
+  .frame figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:16px 18px;
+    display:flex;justify-content:space-between;gap:12px;font-size:13.5px;
+    color:#ece6db;background:linear-gradient(to top,rgba(6,10,14,.82),rgba(6,10,14,0));
+  }
+  .f-a{grid-column:span 7;aspect-ratio:3/2}
+  .f-b{grid-column:span 5;aspect-ratio:4/5}
+  .f-c{grid-column:span 5;aspect-ratio:1/1}
+  .f-d{grid-column:span 7;aspect-ratio:16/10}
+  @media (max-width:760px){.f-a,.f-b,.f-c,.f-d{grid-column:span 12}}
+
+  /* ---------- practice ---------- */
+  .practice{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .practice > div{background:var(--page);padding:36px 30px}
+  .practice h3{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 10px}
+  .practice p{margin:0 0 14px;color:var(--muted);font-size:15px}
+  .practice ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+  .practice li{margin-bottom:4px}
+  @media (max-width:820px){.practice{grid-template-columns:1fr}}
+
+  /* ---------- about ---------- */
+  .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center}
+  .portrait{border:1px solid var(--line);background:var(--panel);aspect-ratio:4/5;overflow:hidden}
+  .about p{max-width:60ch}
+  .facts{display:grid;grid-template-columns:repeat(3,auto);gap:26px;margin-top:34px;border-top:1px solid var(--line);padding-top:24px}
+  .facts b{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1}
+  .facts span{font-size:13.5px;color:var(--muted)}
+  @media (max-width:820px){.about{grid-template-columns:1fr;gap:34px}}
+
+  /* ---------- contact ---------- */
+  .contact{border-top:1px solid var(--line);background:var(--panel)}
+  .contact-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:start}
+  .cta{
+    display:inline-block;margin-top:26px;text-decoration:none;font-size:15px;
+    padding:15px 30px;border:1px solid var(--accent);color:var(--accent);border-radius:999px;
+    transition:background .25s,color .25s;
+  }
+  .cta:hover{background:var(--accent);color:var(--page)}
+  .details{display:grid;gap:18px}
+  .details div{border-bottom:1px solid var(--line);padding-bottom:14px}
+  .details dt{font-size:13.5px;color:var(--muted);margin-bottom:3px}
+  .details dd{margin:0;font-size:16px}
+  .details a{text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+  .details a:hover{border-bottom-color:var(--accent)}
+  @media (max-width:820px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+
+  footer.site{padding:30px 0;font-size:13.5px;color:var(--muted)}
+  footer.site .bar{height:auto;flex-wrap:wrap;gap:10px}
+
+  /* reveal */
+  .rise{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rise.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rise{opacity:1;transform:none;transition:none}
+    .scroll-cue i::after{animation:none}
+    .frame canvas,.frame img{transition:none}
+  }
+
+  .loader{position:fixed;inset:0;z-index:90;background:var(--page);display:grid;place-items:center;transition:opacity .6s ease}
+  .loader.done{opacity:0;pointer-events:none}
+  .loader span{font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><span>Hasan Mahdi</span></div>
+
+<header class="site" id="masthead">
+  <div class="wrap bar">
+    <a class="mark" href="#top"><b>Hasan Mahdi</b><span>photography</span></a>
+    <nav class="links">
+      <a href="#work">Work</a>
+      <a href="#frames">Recent frames</a>
+      <a href="#practice">Practice</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="ghost" id="theme" aria-label="Switch to light appearance">Light</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <canvas id="dust" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">Beirut &amp; the Bekaa — available worldwide</p>
+          <h1>Light kept<br><em>on record.</em></h1>
+        </div>
+        <div>
+          <p class="lede">Portraits, architecture and long-form documentary work, made slowly and printed properly.</p>
+          <div class="hero-meta">
+            <span>Editorial</span><span>Commercial</span><span>Archive &amp; print</span>
+          </div>
+          <div class="scroll-cue"><i></i> Drag the gallery to look around</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="work">
+    <div class="wrap pad">
+      <div class="head rise">
+        <h2>Selected work</h2>
+        <p>Nine sequences from the last four years. Turn the carousel to move between them, or use the arrows.</p>
+      </div>
+    </div>
+    <div class="stage-shell">
+      <canvas id="stage" tabindex="0" role="group" aria-label="Three-dimensional gallery of photographic series. Use the left and right arrow keys to move between prints."></canvas>
+    </div>
+    <div class="wrap">
+      <div class="stage-ui">
+        <div class="caption" aria-live="polite">
+          <h3 id="capTitle">—</h3>
+          <p id="capMeta">—</p>
+        </div>
+        <div class="pager">
+          <button id="prev" aria-label="Previous print">&#8592;</button>
+          <span class="count" id="count">01 / 09</span>
+          <button id="next" aria-label="Next print">&#8594;</button>
+        </div>
+      </div>
+      <p class="hint">Prints shown at 3:2. Full sequences and licensing available on request.</p>
+    </div>
+  </section>
+
+  <section class="pad" id="frames">
+    <div class="wrap">
+      <div class="head rise">
+        <h2>Recent frames</h2>
+        <p>Single images from assignments and personal shooting, updated each season.</p>
+      </div>
+      <div class="frames" id="frameGrid"></div>
+    </div>
+  </section>
+
+  <section class="pad" id="practice" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head rise"><h2>How the work is made</h2>
+        <p>Three ways studios, editors and families usually work with me.</p>
+      </div>
+      <div class="practice rise">
+        <div>
+          <h3>Editorial &amp; documentary</h3>
+          <p>Reported picture stories with time built in — a day minimum, usually three.</p>
+          <ul><li>Research and access</li><li>Shooting on location</li><li>Edit, captions, delivery</li></ul>
+        </div>
+        <div>
+          <h3>Portraits</h3>
+          <p>Studio or on location, for profiles, company pages and family archives.</p>
+          <ul><li>Sitting of 60–120 minutes</li><li>15 retouched images</li><li>Prints on request</li></ul>
+        </div>
+        <div>
+          <h3>Architecture &amp; interiors</h3>
+          <p>Buildings photographed through a full day so the light does the describing.</p>
+          <ul><li>Tilt-shift coverage</li><li>Dawn and dusk exteriors</li><li>Licensed for press use</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad" id="about" style="border-top:1px solid var(--line)">
+    <div class="wrap about">
+      <div class="portrait"><canvas id="portrait" width="800" height="1000" aria-label="Portrait of Hasan Mahdi"></canvas></div>
+      <div class="rise">
+        <h2>About</h2>
+        <p style="margin-top:18px">Hasan Mahdi is a photographer based between Beirut and the Bekaa. He started in 2014 photographing stonework and restoration sites, and the habit stuck: return to a place often enough and it starts to show you something.</p>
+        <p>His work has run in regional and international press, and he shoots commissions for architects, hotels, cultural institutions and private clients. Everything is edited by hand, and archive files are kept for ten years so a client can come back for a frame long after the job closes.</p>
+        <div class="facts">
+          <div><b>12</b><span>years shooting</span></div>
+          <div><b>240+</b><span>commissions</span></div>
+          <div><b>6</b><span>exhibitions</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact pad" id="contact">
+    <div class="wrap contact-grid">
+      <div class="rise">
+        <h2>Start a project</h2>
+        <p style="color:var(--muted);max-width:46ch;margin-top:16px">Tell me the dates, the place and what the pictures are for. I reply within two working days, and I'll say plainly if a job isn't a good fit.</p>
+        <a class="cta" href="mailto:studio@hasanmahdi.photo?subject=Project%20enquiry">Write to the studio</a>
+      </div>
+      <dl class="details rise">
+        <div><dt>Email</dt><dd><a href="mailto:studio@hasanmahdi.photo">studio@hasanmahdi.photo</a></dd></div>
+        <div><dt>Studio</dt><dd>Mar Mikhael, Beirut — visits by appointment</dd></div>
+        <div><dt>Instagram</dt><dd><a href="#contact">@hasanmahdi.photo</a></dd></div>
+        <div><dt>Rates</dt><dd>Day rate and licensing sent on enquiry</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap bar">
+    <span>© <span id="yr">2026</span> Hasan Mahdi Photography.</span>
+    <span>Designed by Eng Mahdi</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- theme ---------------- */
+  var root = document.documentElement, btn = document.getElementById("theme");
+  function applyTheme(t){
+    if(t) root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+    var dark = getComputedStyle(root).getPropertyValue("--page").trim().indexOf("#f1") === -1;
+    btn.textContent = dark ? "Light" : "Dark";
+    btn.setAttribute("aria-label", dark ? "Switch to light appearance" : "Switch to dark appearance");
+    if(window.__repaint) window.__repaint();
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem("hm-theme"); }catch(e){}
+  applyTheme(saved);
+  btn.addEventListener("click", function(){
+    var isLight = btn.textContent === "Dark";
+    var next = isLight ? "dark" : "light";
+    applyTheme(next);
+    try{ localStorage.setItem("hm-theme", next); }catch(e){}
+  });
+  function cssVar(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---------------- masthead + reveals ---------------- */
+  var mast = document.getElementById("masthead");
+  window.addEventListener("scroll", function(){
+    mast.classList.toggle("scrolled", window.scrollY > 20);
+  }, {passive:true});
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, {threshold:.18});
+  document.querySelectorAll(".rise").forEach(function(el){ io.observe(el); });
+
+  /* =====================================================================
+     YOUR PHOTOS
+     ---------------------------------------------------------------------
+     Drop files into the /images folder using exactly these names, or
+     change the "file" value below to whatever you named yours.
+     Anything missing falls back to a generated plate, so the site never
+     breaks while you are still filling the folder.
+
+       images/work/     the 3D carousel   — landscape, 3:2, ~1800x1200px
+       images/frames/   the grid          — any shape, ~1600px long edge
+       images/about/    the portrait      — upright, 4:5, ~1200x1500px
+
+     Keep files under about 400KB each so the page stays quick.
+     ===================================================================== */
+  var SERIES = [
+    {file:"images/work/01.jpg", t:"Stone and Scaffold", m:"Baalbek restoration — 2023 — 24 frames", h:[28,40], mood:"ruins"},
+    {file:"images/work/02.jpg", t:"Harvest Road", m:"Bekaa valley — 2024 — 31 frames", h:[38,52], mood:"fields"},
+    {file:"images/work/03.jpg", t:"The Long Room", m:"Interiors, Achrafieh — 2022 — 18 frames", h:[24,34], mood:"interior"},
+    {file:"images/work/04.jpg", t:"Cedars in Winter", m:"Bsharri — 2025 — 22 frames", h:[196,210], mood:"mountain"},
+    {file:"images/work/05.jpg", t:"Night Fishermen", m:"Tyre harbour — 2023 — 27 frames", h:[206,224], mood:"sea"},
+    {file:"images/work/06.jpg", t:"Workshop Hands", m:"Portraits, Tripoli — 2024 — 16 frames", h:[20,32], mood:"portrait"},
+    {file:"images/work/07.jpg", t:"Concrete Bloom", m:"Architecture, Beirut — 2025 — 20 frames", h:[200,214], mood:"building"},
+    {file:"images/work/08.jpg", t:"Sunday Kitchens", m:"Family archive — 2021 — 34 frames", h:[30,44], mood:"interior"},
+    {file:"images/work/09.jpg", t:"Before the Rain", m:"Anti-Lebanon range — 2026 — 19 frames", h:[210,228], mood:"mountain"}
+  ];
+
+  /* The four images in the grid, and the portrait in the About section. */
+  var FRAMES = [
+    {file:"images/frames/01.jpg", cls:"f-a", cap:"Threshing floor, Qaa",      meta:"Bekaa",   plate:1},
+    {file:"images/frames/02.jpg", cls:"f-b", cap:"Marble cutter, Abu Jamil",  meta:"Tripoli", plate:5},
+    {file:"images/frames/03.jpg", cls:"f-c", cap:"Stairwell, Sassine",        meta:"Beirut",  plate:6},
+    {file:"images/frames/04.jpg", cls:"f-d", cap:"Second haul, 04:40",        meta:"Tyre",    plate:4}
+  ];
+  var PORTRAIT = "images/about/portrait.jpg";
+
+  function hsl(h,s,l){ return "hsl("+h+","+s+"%,"+l+"%)"; }
+
+  /* Draws an image to fill w x h without squashing it (like CSS object-fit: cover). */
+  function coverDraw(ctx, img, w, h){
+    var r = Math.max(w/img.width, h/img.height);
+    var dw = img.width*r, dh = img.height*r;
+    ctx.drawImage(img, (w-dw)/2, (h-dh)/2, dw, dh);
+  }
+
+  function plate(w, h, spec, seed){
+    var c = document.createElement("canvas");
+    c.width = w; c.height = h;
+    var x = c.getContext("2d");
+    var rnd = (function(s){ return function(){ s = (s*16807)%2147483647; return (s-1)/2147483646; }; })(seed*7919+13);
+    var h1 = spec.h[0], h2 = spec.h[1];
+
+    var g = x.createLinearGradient(0,0,0,h);
+    g.addColorStop(0, hsl(h2, 26, 74));
+    g.addColorStop(.45, hsl((h1+h2)/2, 22, 46));
+    g.addColorStop(1, hsl(h1, 18, 13));
+    x.fillStyle = g; x.fillRect(0,0,w,h);
+
+    // sun / key light
+    var sx = w*(.22+rnd()*.56), sy = h*(.22+rnd()*.2);
+    var rg = x.createRadialGradient(sx,sy,0,sx,sy,w*.6);
+    rg.addColorStop(0,"rgba(255,236,196,.55)");
+    rg.addColorStop(1,"rgba(255,236,196,0)");
+    x.fillStyle = rg; x.fillRect(0,0,w,h);
+
+    x.save();
+    if(spec.mood === "mountain" || spec.mood === "fields" || spec.mood === "sea"){
+      for(var layer=0; layer<3; layer++){
+        var base = h*(.56+layer*.11), amp = h*(.16-layer*.04);
+        x.beginPath(); x.moveTo(0,h);
+        for(var px=0; px<=w; px+=8){
+          var t = px/w;
+          var y = base - Math.sin(t*(3+layer)+rnd()*0.002+layer)*amp - Math.sin(t*11+layer*2)*amp*.22;
+          x.lineTo(px, y);
+        }
+        x.lineTo(w,h); x.closePath();
+        x.fillStyle = "hsla("+h1+",14%,"+(20-layer*5)+"%,"+(.55+layer*.18)+")";
+        x.fill();
+      }
+      if(spec.mood === "sea"){
+        x.globalAlpha=.25; x.fillStyle="rgba(255,240,210,.8)";
+        for(var i=0;i<60;i++){ var yy=h*(.72+rnd()*.26); x.fillRect(w*rnd(), yy, 10+rnd()*70, 1.2); }
+        x.globalAlpha=1;
+      }
+    } else if(spec.mood === "ruins" || spec.mood === "building"){
+      var cols = 4 + Math.floor(rnd()*4);
+      for(var i2=0;i2<cols;i2++){
+        var cw = w*(.06+rnd()*.05), cx = w*(i2/cols) + w*.02 + rnd()*w*.04;
+        var top = h*(.18+rnd()*.24);
+        x.fillStyle = "hsla("+h1+",12%,"+(16+i2*3)+"%,.82)";
+        x.fillRect(cx, top, cw, h-top);
+        x.fillStyle = "hsla(44,30%,78%,.10)";
+        x.fillRect(cx, top, cw*.28, h-top);
+      }
+      x.fillStyle = "hsla("+h1+",14%,10%,.9)";
+      x.fillRect(0, h*.9, w, h*.1);
+    } else if(spec.mood === "portrait"){
+      var cx2 = w*.5, cy = h*.62, rr = Math.min(w,h)*.3;
+      var sg = x.createRadialGradient(cx2, cy-rr*.5, rr*.1, cx2, cy, rr*1.8);
+      sg.addColorStop(0,"hsla(34,28%,62%,.85)");
+      sg.addColorStop(1,"hsla("+h1+",16%,8%,.95)");
+      x.fillStyle = sg;
+      x.beginPath(); x.ellipse(cx2, cy, rr*.72, rr*1.02, 0, 0, Math.PI*2); x.fill();
+      x.beginPath(); x.ellipse(cx2, cy-rr*.95, rr*.44, rr*.52, 0, 0, Math.PI*2); x.fill();
+    } else {
+      for(var k=0;k<3;k++){
+        var wx = w*(.08+k*.3+rnd()*.06), wy = h*(.16+rnd()*.1);
+        var ww = w*.14, wh = h*.44;
+        var wg = x.createLinearGradient(wx,wy,wx,wy+wh);
+        wg.addColorStop(0,"rgba(255,242,214,.72)");
+        wg.addColorStop(1,"rgba(255,242,214,.06)");
+        x.fillStyle = wg; x.fillRect(wx,wy,ww,wh);
+        x.fillStyle="hsla("+h1+",14%,9%,.55)";
+        x.fillRect(wx+ww*.48, wy, ww*.04, wh);
+      }
+      x.fillStyle="hsla("+h1+",16%,10%,.72)";
+      x.fillRect(0,h*.78,w,h*.22);
+    }
+    x.restore();
+
+    // vignette
+    var vg = x.createRadialGradient(w/2,h/2,Math.min(w,h)*.25,w/2,h/2,Math.max(w,h)*.78);
+    vg.addColorStop(0,"rgba(0,0,0,0)");
+    vg.addColorStop(1,"rgba(6,9,12,.72)");
+    x.fillStyle = vg; x.fillRect(0,0,w,h);
+
+    // grain
+    var img = x.getImageData(0,0,w,h), d = img.data;
+    for(var p=0;p<d.length;p+=4){
+      var n = (rnd()-.5)*22;
+      d[p]+=n; d[p+1]+=n; d[p+2]+=n;
+    }
+    x.putImageData(img,0,0);
+    return c;
+  }
+
+  /* ---------------- hero dust field ---------------- */
+  var dustCanvas = document.getElementById("dust");
+  var dRenderer, dScene, dCam, dPoints, dMat;
+  function initDust(){
+    dRenderer = new THREE.WebGLRenderer({canvas:dustCanvas, antialias:true, alpha:false});
+    dRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    dScene = new THREE.Scene();
+    dCam = new THREE.PerspectiveCamera(60,1,.1,120);
+    dCam.position.set(0,0,26);
+
+    var n = window.innerWidth < 760 ? 900 : 2200;
+    var geo = new THREE.BufferGeometry();
+    var pos = new Float32Array(n*3), sc = new Float32Array(n);
+    for(var i=0;i<n;i++){
+      pos[i*3]   = (Math.random()-.5)*70;
+      pos[i*3+1] = (Math.random()-.5)*44;
+      pos[i*3+2] = (Math.random()-.5)*40;
+      sc[i] = Math.random();
+    }
+    geo.setAttribute("position", new THREE.BufferAttribute(pos,3));
+    geo.setAttribute("aScale", new THREE.BufferAttribute(sc,1));
+    dMat = new THREE.PointsMaterial({size:.14, transparent:true, opacity:.55, depthWrite:false});
+    dPoints = new THREE.Points(geo, dMat);
+    dScene.add(dPoints);
+    sizeDust();
+  }
+  function sizeDust(){
+    var w = dustCanvas.clientWidth || window.innerWidth;
+    var h = dustCanvas.clientHeight || window.innerHeight;
+    dRenderer.setSize(w,h,false);
+    dCam.aspect = w/h; dCam.updateProjectionMatrix();
+  }
+
+  /* ---------------- 3d carousel ---------------- */
+  var stage = document.getElementById("stage");
+  var renderer, scene, cam, group, cards = [], mirrors = [];
+  var RADIUS = 6.4, STEP = (Math.PI*2)/SERIES.length;
+  var current = 0, targetRot = 0, rot = 0, vel = 0, dragging = false, lastX = 0;
+
+  function initStage(){
+    renderer = new THREE.WebGLRenderer({canvas:stage, antialias:true, alpha:false});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    scene = new THREE.Scene();
+    cam = new THREE.PerspectiveCamera(42,1,.1,120);
+    cam.position.set(0,.55,12.4);
+    cam.lookAt(0,0,0);
+    group = new THREE.Group();
+    scene.add(group);
+
+    var pw = 3.5, ph = pw*2/3;
+    SERIES.forEach(function(s,i){
+      var tex = new THREE.CanvasTexture(plate(768, 512, s, i+1));
+      tex.minFilter = THREE.LinearFilter;
+      // Try the real photograph; if the file isn't there yet, keep the plate.
+      if(s.file){
+        var probe = new Image();
+        probe.onload = function(){
+          var fit = document.createElement("canvas");
+          fit.width = 1200; fit.height = 800;
+          coverDraw(fit.getContext("2d"), probe, 1200, 800);
+          tex.image = fit; tex.needsUpdate = true;
+        };
+        probe.src = s.file;
+      }
+      var mat = new THREE.MeshBasicMaterial({map:tex, transparent:true});
+      var mesh = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), mat);
+      var a = i*STEP;
+      mesh.position.set(Math.sin(a)*RADIUS, .45, Math.cos(a)*RADIUS);
+      mesh.rotation.y = a;
+      group.add(mesh); cards.push(mesh);
+
+      var mMat = new THREE.MeshBasicMaterial({map:tex, transparent:true, opacity:.14, depthWrite:false});
+      var mir = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), mMat);
+      mir.position.set(mesh.position.x, .45 - ph - .12, mesh.position.z);
+      mir.rotation.y = a; mir.scale.y = -1;
+      group.add(mir); mirrors.push(mir);
+    });
+
+    sizeStage();
+    bindStage();
+    setIndex(0, true);
+  }
+  function sizeStage(){
+    var w = stage.clientWidth || window.innerWidth;
+    var h = stage.clientHeight || 480;
+    renderer.setSize(w,h,false);
+    cam.aspect = w/h;
+    cam.position.z = w < 760 ? 15.5 : 12.4;
+    cam.updateProjectionMatrix();
+  }
+  function setIndex(i, snap){
+    current = ((i % SERIES.length) + SERIES.length) % SERIES.length;
+    targetRot = -current*STEP;
+    if(snap){ rot = targetRot; }
+    document.getElementById("capTitle").textContent = SERIES[current].t;
+    document.getElementById("capMeta").textContent = SERIES[current].m;
+    document.getElementById("count").textContent =
+      String(current+1).padStart(2,"0") + " / " + String(SERIES.length).padStart(2,"0");
+  }
+  function nearestIndex(){ return Math.round(-rot/STEP); }
+
+  function bindStage(){
+    function down(e){
+      dragging = true; vel = 0; stage.classList.add("dragging");
+      lastX = (e.touches ? e.touches[0].clientX : e.clientX);
+    }
+    function move(e){
+      if(!dragging) return;
+      var x = (e.touches ? e.touches[0].clientX : e.clientX);
+      var dx = x - lastX; lastX = x;
+      rot += dx*0.006; vel = dx*0.006;
+      targetRot = rot;
+    }
+    function up(){
+      if(!dragging) return;
+      dragging = false; stage.classList.remove("dragging");
+      rot += vel*8;
+      setIndex(nearestIndex());
+    }
+    stage.addEventListener("mousedown", down);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+    stage.addEventListener("touchstart", down, {passive:true});
+    stage.addEventListener("touchmove", move, {passive:true});
+    stage.addEventListener("touchend", up);
+    stage.addEventListener("keydown", function(e){
+      if(e.key === "ArrowRight"){ setIndex(current+1); e.preventDefault(); }
+      if(e.key === "ArrowLeft"){ setIndex(current-1); e.preventDefault(); }
+    });
+    document.getElementById("next").addEventListener("click", function(){ setIndex(current+1); });
+    document.getElementById("prev").addEventListener("click", function(){ setIndex(current-1); });
+  }
+
+  /* ---------------- frame grid + portrait ---------------- */
+  function buildGrid(){
+    var grid = document.getElementById("frameGrid");
+    FRAMES.forEach(function(p,i){
+      var fig = document.createElement("figure");
+      fig.className = "frame " + p.cls + " rise";
+
+      var img = document.createElement("img");
+      img.alt = p.cap; img.loading = "lazy";
+      img.style.width = "100%"; img.style.height = "100%";
+      img.style.objectFit = "cover"; img.style.display = "block";
+      img.onerror = function(){                       // no photo yet — show a plate
+        var c = plate(900, 700, SERIES[p.plate], 40+i*3);
+        c.setAttribute("role","img");
+        c.setAttribute("aria-label", p.cap);
+        fig.replaceChild(c, img);
+      };
+      img.src = p.file;
+      fig.appendChild(img);
+
+      var cap = document.createElement("figcaption");
+      cap.innerHTML = "<span>"+p.cap+"</span><span>"+p.meta+"</span>";
+      fig.appendChild(cap);
+      grid.appendChild(fig);
+      io.observe(fig);
+    });
+
+    var pc = document.getElementById("portrait");
+    pc.getContext("2d").drawImage(plate(800,1000, SERIES[5], 91), 0, 0, 800, 1000);
+    var pImg = new Image();
+    pImg.onload = function(){ coverDraw(pc.getContext("2d"), pImg, 800, 1000); };
+    pImg.src = PORTRAIT;
+  }
+
+  /* ---------------- loop ---------------- */
+  function repaint(){
+    var bg = new THREE.Color(cssVar("--scene-bg") || "#0d1319");
+    if(scene) scene.background = bg;
+    if(dScene) dScene.background = bg;
+    if(dMat) dMat.color = new THREE.Color(cssVar("--scene-dust") || "#c9a253");
+  }
+  window.__repaint = repaint;
+
+  var clock;
+  function tick(){
+    requestAnimationFrame(tick);
+    var t = clock.getElapsedTime();
+
+    if(!dragging){
+      rot += (targetRot - rot)*0.075;
+    }
+    group.rotation.y = rot;
+
+    for(var i=0;i<cards.length;i++){
+      var a = i*STEP + rot;
+      var facing = Math.cos(a);
+      var lum = 0.30 + Math.max(0, facing)*0.70;
+      cards[i].material.color.setScalar(lum);
+      cards[i].material.opacity = 0.42 + Math.max(0, facing)*0.58;
+      mirrors[i].material.opacity = (0.04 + Math.max(0, facing)*0.14);
+      var lift = Math.max(0, facing);
+      cards[i].position.y = 0.45 + lift*0.28;
+      mirrors[i].position.y = cards[i].position.y - (3.5*2/3) - 0.12;
+    }
+
+    if(!reduce){
+      dPoints.rotation.y = t*0.018;
+      dPoints.position.y = Math.sin(t*0.18)*0.8;
+      dCam.position.x = Math.sin(t*0.1)*1.2;
+      dCam.lookAt(0,0,0);
+    }
+
+    renderer.render(scene, cam);
+    dRenderer.render(dScene, dCam);
+  }
+
+  function boot(){
+    if(!window.THREE){
+      document.getElementById("loader").classList.add("done");
+      return;
+    }
+    clock = new THREE.Clock();
+    initDust();
+    initStage();
+    buildGrid();
+    repaint();
+    tick();
+    window.addEventListener("resize", function(){ sizeDust(); sizeStage(); });
+    setTimeout(function(){ document.getElementById("loader").classList.add("done"); }, 260);
+  }
+
+  if(document.readyState === "complete") boot();
+  else window.addEventListener("load", boot);
+})();
+</script>
+</body>
+</html>
